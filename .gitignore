@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.local
+*.log
+logs/
+boss-job-*.json
+tests/fixtures/boss-job-info/raw/
+*.pdf
+*.docx
+*.png
+*.jpg
+*.jpeg

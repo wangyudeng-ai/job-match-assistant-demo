@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "求职匹配助手",
+  "description": "在 Boss 直聘职位页面自动捕捉职位信息，并展示求职匹配辅助面板。",
+  "version": "0.1.0",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": [
+    "https://www.zhipin.com/*",
+    "http://localhost:3000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.zhipin.com/*"],
+      "js": ["src/content/page-job-info.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://www.zhipin.com/*"],
+      "js": ["src/shared/job-info.js", "src/shared/job-sample-export.js", "src/content/content.js"],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "options_page": "src/options/options.html",
+  "action": {
+    "default_title": "求职匹配助手"
+  }
+}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>求职匹配助手设置</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <h1>求职匹配助手</h1>
+        <p class="summary">V0.1 保存目标岗位和简历文本，并在 Boss 直聘页面自动捕捉职位信息。</p>
+
+        <form id="settings-form" class="form">
+          <label class="field">
+            <span>目标岗位</span>
+            <input id="target-role" name="targetRole" type="text" placeholder="例如：前端工程师">
+          </label>
+
+          <button type="submit">保存设置</button>
+          <p id="status" class="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>简历上传</h2>
+        <p class="summary">简历文字仍在插件本地提取，结构化由本地后端完成。使用前请先启动 http://localhost:3000。</p>
+        <div class="form">
+          <label class="field">
+            <span>选择简历文件</span>
+            <input id="resume-file" type="file" accept=".txt,.text,.pdf,text/plain,application/pdf">
+          </label>
+
+          <div class="actions">
+            <button id="save-resume" type="button">结构化并保存简历</button>
+            <button id="save-profile" class="secondary" type="button">保存编辑结果</button>
+            <button id="clear-resume" class="secondary" type="button">清空简历</button>
+          </div>
+
+          <p id="resume-status" class="status" aria-live="polite"></p>
+
+          <div id="resume-summary" class="resume-summary hidden">
+            <h3>结构化简历</h3>
+            <dl>
+              <div>
+                <dt>姓名</dt>
+                <dd id="resume-name">未识别</dd>
+              </div>
+              <div>
+                <dt>联系方式</dt>
+                <dd id="resume-contact">未识别</dd>
+              </div>
+              <div>
+                <dt>所在地</dt>
+                <dd id="resume-location">未识别</dd>
+              </div>
+              <div>
+                <dt>技能</dt>
+                <dd id="resume-skills">未识别</dd>
+              </div>
+            </dl>
+          </div>
+
+          <label class="field">
+            <span>结构化简历 JSON（可编辑）</span>
+            <textarea id="resume-profile-json" class="json-editor" placeholder="点击“结构化并保存简历”后会显示后端返回的结构化结果。"></textarea>
+          </label>
+
+          <label class="field">
+            <span>简历文本预览</span>
+            <textarea id="resume-text" placeholder="上传纯文本简历后会显示在这里，也可以直接粘贴简历文本。"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>本地后端</h2>
+        <p class="summary">简历结构化和职位匹配分析都通过 http://localhost:3000 完成。API Key、模型名和 Base URL 只在项目根目录的 .env 中配置，不再保存在插件里。</p>
+      </section>
+
+      <section class="panel">
+        <h2>数据与隐私</h2>
+        <div class="privacy-grid">
+          <div>
+            <h3>本地保存</h3>
+            <ul>
+              <li>目标岗位</li>
+              <li>简历原文和结构化简历</li>
+              <li>最近 20 条职位分析历史</li>
+            </ul>
+          </div>
+          <div>
+            <h3>发送给本地后端</h3>
+            <ul>
+              <li>简历结构化：简历原文</li>
+              <li>匹配分析：简历、目标岗位和当前职位</li>
+              <li>模型配置只从后端 .env 读取</li>
+            </ul>
+          </div>
+        </div>
+        <div class="actions privacy-actions">
+          <button id="delete-resume-data" class="danger" type="button">删除简历数据</button>
+          <button id="clear-analysis-history" class="secondary" type="button">清空分析历史</button>
+        </div>
+        <p id="privacy-status" class="status" aria-live="polite"></p>
+      </section>
+
+      <section class="panel">
+        <h2>当前阶段</h2>
+        <ul>
+          <li>已支持目标岗位本地保存。</li>
+          <li>已支持 Boss 页面自动捕捉职位信息。</li>
+          <li>已支持纯文本和文本型 PDF 简历文本提取。</li>
+          <li>已支持本地后端调用模型生成可编辑的结构化简历。</li>
+          <li>已支持本地后端调用模型生成匹配分析，并保存最近分析记录。</li>
+          <li>已支持删除简历数据、清空分析历史和查看数据使用说明。</li>
+        </ul>
+      </section>
+    </main>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
